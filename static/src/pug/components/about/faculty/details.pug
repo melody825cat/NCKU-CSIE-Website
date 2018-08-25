@@ -205,6 +205,7 @@ section.profile
     aside.profile__titles.titles
       each title in titles
         span.titles__title= title.title
+  img.profile__photo( src = `http://www.csie.ncku.edu.tw/ncku_csie/images/teacher/teacher${ profile.profileId }.jpg`, alt = profile.name )
   if departments
     aside.profile__departments.departments
       each department in departments
@@ -228,7 +229,6 @@ section.profile
     h2.specialties__title= i18n[ language ].specialty
     each specialty in specialties
       span.specialties__specialty= specialty.specialty
-  img.profile__photo( src = `http://www.csie.ncku.edu.tw/ncku_csie/images/teacher/teacher${ profile.profileId }.jpg`, alt = profile.name )
 
 //- if education
   section.education

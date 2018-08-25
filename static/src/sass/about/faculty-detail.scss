@@ -31,14 +31,24 @@
     grid-template-columns: 5fr 14fr 5fr;
   }
 
-  .profile {
+  > .profile {
     grid-area: profile;
-    margin: 1.5rem 0;
-    text-align: left;
-    color: #000000;
-    font-size: .5rem;
+    display: grid;
+    grid-template: {
+      areas:
+        'profile__name        profile__titles'
+        'profile__photo       profile__photo'
+        'profile__departments profile__departments'
+        'profile__offices     profile__offices'
+        'profile__email       profile__email'
+        'profile__labs        profile__labs'
+        'profile__web         profile__web'
+        'profile__specialties profile__specialties';
+      columns: 1fr 1fr;
+    };
 
     > .profile__name {
+      grid-area: profile__name;
       padding-right: .5rem;
       font: {
         size: .8rem;
@@ -48,18 +58,31 @@
       color: rgba( 0, 0, 0, .87 );
     }
 
-    > .titles__title {
-      margin: 0 .05rem;
-      vertical-align: middle;
-      font-size: .5rem;
-      text-align: center;
-      padding: 0 .2rem;
-      color: #adacad;
-      border: solid .05rem #adacad;
-      border-radius: .15rem;
+    > .profile__titles.titles {
+      grid-area: profile__titles;
+
+      > .titles__title {
+        margin: 0 .05rem;
+        vertical-align: middle;
+        font-size: .5rem;
+        text-align: center;
+        padding: 0 .2rem;
+        color: #adacad;
+        border: solid .05rem #adacad;
+        border-radius: .15rem;
+      }
+    }
+
+    > .profile__photo {
+      grid-area: profile__photo;
+      border-radius: 4rem;
+      height: 8rem;
+      width: 8rem;
+      margin: auto;
     }
 
     > .profile__departments.departments {
+      grid-area: profile__departments;
       padding: .5rem .3rem .8rem 0;
 
       > .departments__department {
@@ -74,18 +97,46 @@
       }
     }
 
-    > .profile__office {
+    > .profile__offices.offices {
+      grid-area: profile__offices;
       padding: .3rem 0;
-      @include icon--before__location--small () {
-        margin: .1rem;
-        margin-right: .5rem;
-        height: .5rem;
-        width: .5rem;
-        vertical-align: middle;
+
+      > .offices__tel {
+        display: block;
+        padding: .5rem 0;
+
+        &::before {
+          @include icon__phone ();
+          content: ' ';
+          display: inline-block;
+          margin: .1rem;
+          margin-right: .5rem;
+          height: .5rem;
+          width: .5rem;
+          vertical-align: middle;
+          background: {
+            repeat: no-repeat;
+            size: contain;
+            position: center;
+          }
+        }
+      }
+
+      > .offices__address {
+        display: block;
+        padding: .5rem 0;
+        @include icon--before__location--small () {
+          margin: .1rem;
+          margin-right: .5rem;
+          height: .5rem;
+          width: .5rem;
+          vertical-align: middle;
+        }
       }
     }
 
     > .profile__email {
+      grid-area: profile__email;
       display: block;
       padding: .3rem 0;
       @include icon--before--envelope () {
@@ -97,19 +148,8 @@
       }
     }
 
-    > .profile__phone {
-      display: block;
-      padding: .5rem 0;
-      @include icon--before--phone () {
-        margin: .1rem;
-        margin-right: .5rem;
-        height: .5rem;
-        width: .5rem;
-        vertical-align: middle;
-      }
-    }
-
-    > .profile__lab {
+    > .profile__labs.labs {
+      grid-area: profile__labs;
       padding: .3rem 0;
       @include icon--before--laboratory () {
         margin: .1rem;
@@ -119,13 +159,19 @@
         vertical-align: middle;
       }
 
-      > .profile__lab--location {
-        padding: 0 1rem;
-        color: #868686;
+      > .labs__lab.lab {
+        > .lab__name {
+          padding: .1rem 0;
+        }
+
+        > .lab__address {
+          color: #adacad;
+        }
       }
     }
 
-    > .profile__website {
+    > .profile__web {
+      grid-area: profile__web;
       padding: .5rem 0;
       @include icon--before--user () {
         margin: .1rem;
@@ -136,21 +182,25 @@
       }
     }
 
-    > .profile__domains {
+    > .profile__specialties.specialties {
+      grid-area: profile__specialties;
       font-size: .45rem;
-      display: flex;
-      flex-wrap: wrap;
       padding: .3rem 0;
       padding-right: 1rem;
-      @include icon--before--search () {
-        margin: .1rem;
-        margin-right: .5rem;
-        height: .5rem;
-        width: .5rem;
-        vertical-align: middle;
+
+      > .specialties__title {
+        display: flex;
+        flex-wrap: wrap;
+        @include icon--before--search () {
+          margin: .1rem;
+          margin-right: .5rem;
+          height: .5rem;
+          width: .5rem;
+          vertical-align: middle;
+        }
       }
 
-      > .domains__domain {
+      > .specialties__specialty {
         padding: .15rem .6rem;
         border-radius: .5rem;
         text-align: center;
@@ -160,14 +210,6 @@
         vertical-align: baseline;
       }
     }
-  }
-
-  .photo {
-    grid-area: profile__photo;
-    border-radius: 4rem;
-    height: 8rem;
-    width: 8rem;
-    margin: auto;
   }
 
   /*
